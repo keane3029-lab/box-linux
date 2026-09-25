@@ -1,36 +1,32 @@
 name: Build Debian ISO
 
 on:
-  schedule:
-    - cron: '0 6 * * *'
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build_iso:
+  build:
     runs-on: ubuntu-latest
-    container:
-      image: debian:trixie
-      options: --privileged # Required for live-build chroot / chroot mounts
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Install dependencies & live-build
-        run: |
-          apt-get update
-          apt-get install -y make wget ca-certificates live-build debootstrap isolinux syslinux-utils ccache
+      # Add your existing ISO build steps here
 
-      - name: Download extra components
-        run: make download_extra
-
-      - name: Build ISO image
-        run: |
-          lb clean --purge
-          lb config
-          lb build
-
-      - name: Upload ISO Artifact
-        uses: actions/upload-artifact@v4
+      - name: Publish to Releases (Placeholder / Latest)
+        uses: softprops/action-gh-release@v2
         with:
-          name: debian-live-iso
-          path: "*.iso"
-          if-no-files-found: error
+          tag_name: latest
+          name: Box Linux (Latest Build)
+          body: "Automated build from main."
+          draft: false
+          prerelease: false
+          make_latest: "true"
+          files: |
+            *.iso
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
