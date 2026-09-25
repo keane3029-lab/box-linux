@@ -1,0 +1,36 @@
+name: Build Debian ISO
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  build_iso:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+      options: --privileged # Required for live-build chroot / chroot mounts
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies & live-build
+        run: |
+          apt-get update
+          apt-get install -y make wget ca-certificates live-build debootstrap isolinux syslinux-utils ccache
+
+      - name: Download extra components
+        run: make download_extra
+
+      - name: Build ISO image
+        run: |
+          lb clean --purge
+          lb config
+          lb build
+
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debian-live-iso
+          path: "*.iso"
+          if-no-files-found: error
