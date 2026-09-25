@@ -1,65 +1,29 @@
-# debian-live-config
+# Box Linux (BL)
 
-> [!IMPORTANT]
-> The mirror at https://gitlab.com/nodiscc/debian-live-config will no longer be maintained  
-> Please use https://codeberg.org/nodiscc/debian-live-config or https://github.com/nodiscc/debian-live-config instead  
-> Issues have been moved to https://codeberg.org/nodiscc/debian-live-config/issues
+Box Linux (BL) is a custom Debian-based Linux distribution built with
+`live-build`. It's a fun, community-friendly learning project exploring what
+it takes to build your own OS from an existing, proven base.
 
-[Debian GNU/Linux](https://www.debian.org/) desktop operating system for personal computers & workstations.
+## About
 
-![](https://gitlab.com/nodiscc/toolbox/-/raw/master/DOC/SCREENSHOTS/debian-live-config-5.0.0-main.png)
+- **Base:** Debian
+- **Build tool:** live-build
+- **Status:** Active development
+- **Goal:** A fun learning project, no massive ambitions attached
 
-## Features
+## Features (planned)
 
-- Ready-to-use operating system for personal computers/workstations
-- Preinstalled, preconfigured software for common tasks (office, multimedia, network...)
-- Good out-of-the-box experience with a focus on usability
-- Installation time < 10 minutes, without Internet access
-- Able to run [live](https://en.wikipedia.org/wiki/Live_USB) from USB drive (no installation required)
-- Fits on a 4GB USB drive
-- Only uses official Debian [stable](https://wiki.debian.org/DebianStable) + [backports](https://wiki.debian.org/Backports) packages and as few third-party components as possible
-- Reliable, low maintenance
-- Lightweight/low resource usage, good performance on low-end or recycled hardware
-- Proprietary drivers/firmware for good compatibility with recent hardware
-
-This repository contains the `live-build` configuration and scripts used to build a custom Debian ISO image. See [Building a custom Debian ISO image](doc/md/custom.md).
-
-
-## Download
-
-**[![](doc/md/download.png) Download ISO image](https://files.awesome-selfhosted.net/debian-live-config-5.0.0-debian-trixie-amd64.iso)** (64-bit)
-
-
-## Documentation
-
-- [Download and installation](doc/md/download-and-installation.md)
-- [Usage](doc/md/usage.md)
-- [Software: Utility](doc/md/packages/utility.md)
-- [Software: Internet and network](doc/md/packages/network.md)
-- [Software: Audio and video](doc/md/packages/audio-video.md)
-- [Software: Office](doc/md/packages/office.md)
-- [Software: Graphics](doc/md/packages/graphics.md)
-- [Software: System](doc/md/packages/system.md)
-- [Software: Development](doc/md/packages/development.md)
-- [Software: Games](doc/md/packages/games.md)
-- [Software: Extras](doc/md/packages/extras.md)
-- [Changelog](CHANGELOG.md)
-
-
-## Screenshots
-
-![](https://gitlab.com/nodiscc/toolbox/-/raw/master/DOC/SCREENSHOTS/debian-live-config-5.0.0-main.png)
-
-![](https://gitlab.com/nodiscc/toolbox/-/raw/master/DOC/SCREENSHOTS/debian-live-config-5.0.0-windows.png)
-
-
-## Source code
-
-- [Codeberg](https://codeberg.org/nodiscc/debian-live-config) (mirror)
-- [Github](https://github.com/nodiscc/debian-live-config) (mirror)
-
+- `fastfetch` instead of `neofetch` for system info
+- Custom open-box logo/branding
 
 ## License
 
-[LICENSE](LICENSE)
+Box Linux is dual-licensed under **GPLv3** and **MIT**. You may use this
+project under either license, at your choice.
 
+- See [`LICENSE`](./LICENSE) for the GPLv3 terms.
+- See [`LICENSE-MIT.md`](./LICENSE-MIT.md) for the MIT terms.
+
+## Credits
+
+Built on top of [nodiscc/debian-live-config](https://github.com/nodiscc/debian-live-config).
