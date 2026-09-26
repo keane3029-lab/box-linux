@@ -3,6 +3,7 @@ name: Build Debian ISO
 on:
   push:
     branches: [ master ]
+  workflow_dispatch: # Enable manual triggers via gh CLI and GitHub UI
 
 permissions:
   contents: write
@@ -13,6 +14,7 @@ jobs:
     container:
       image: debian:trixie
       options: --privileged
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -32,16 +34,31 @@ jobs:
         run: |
           mv *.hybrid.iso box-linux.iso || mv live-image-*.iso box-linux.iso || true
 
-      - name: Publish to Releases (Placeholder / Latest)
+      - name: Upload ISO as Action Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: box-linux-iso
+          path: box-linux.iso
+          retention-days: 7
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download ISO Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: box-linux-iso
+
+      - name: Publish to Releases
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: Box Linux (Latest Build)
-          body: "Automated build from main."
+          body: "Automated build from master branch."
           draft: false
           prerelease: false
           make_latest: "true"
-          files: |
-            *.iso
+          files: box-linux.iso
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
