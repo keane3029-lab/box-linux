@@ -14,7 +14,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Add your existing ISO build steps here
+      - name: Install live-build and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y live-build debootstrap syslinux-utils xorriso squashfs-tools
+
+      - name: Build ISO
+        run: |
+          sudo lb clean
+          sudo lb config
+          sudo lb build
+
+      - name: Rename ISO for clarity
+        run: |
+          mv *.hybrid.iso box-linux.iso || mv live-image-*.iso box-linux.iso || true
 
       - name: Publish to Releases (Placeholder / Latest)
         uses: softprops/action-gh-release@v2
